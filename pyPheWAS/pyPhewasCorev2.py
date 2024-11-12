@@ -57,6 +57,7 @@ def get_codes(filename):
 		phecode_map.dropna(subset=[phecode_col], inplace=True)
 		phecode_map.drop_duplicates(subset=[new_data_col,phecode_col], inplace=True)
 	except Exception as e:
+		print(e)
 		log = logging.getLogger(__name__)
 		log.error(f'{e.args[0]}\nError loading phecode map : exiting pyPheWAS')
 		sys.exit()
@@ -982,8 +983,8 @@ RESERVED_COL_NAMES = [MAX_AGE_AT_ICD, MAX_AGE_AT_CPT, 'phe', 'phewas_cov', 'prow
 
 #----------------------------------------------------------
 # load ICD maps (pyPheWAS)
-icd9_codes = get_codes('phecode_map_v1_2_icd9.csv')
-icd10_codes = get_codes('phecode_map_v1_2_icd10_beta.csv')
+icd9_codes = get_codes('icd9_codes_to_phecodeX_map.csv')
+icd10_codes = get_codes('icd10_codes_to_phecodeX_map.csv')
 # load CPT maps (pyProWAS)
 cpt_codes = get_codes('prowas_codes.csv')
 #----------------------------------------------------------

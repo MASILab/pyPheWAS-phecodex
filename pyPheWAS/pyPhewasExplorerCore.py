@@ -426,7 +426,7 @@ def check_existing_models(base_path, var_list):
 	# check if reg exists - can just reload it instead of re-calculating
 	reg_exists = True
 	for var in var_list:
-		var_file = base_path + var + ("_primary.csv" if var == var_list[0] else '.csv')
+		var_file = Path(base_path + var + ("_primary.csv" if var == var_list[0] else '.csv'))
 		reg_exists &= var_file.exists()
 	return reg_exists
 
@@ -458,7 +458,7 @@ def run_phewas(fm, demo, model_str, reg_type, save_cov=False, outpath=Path('.'))
 	reg_exists = check_existing_models(base_path, var_list)
 
 	if reg_exists:
-		phecode_file = base_path + var_list[0] + '.csv'
+		phecode_file = base_path + var_list[0] + '_primary.csv'
 		regressions = pd.read_csv(phecode_file, skiprows=1)
 	else:
 		cols = [dependent] + predictors.split('+')
